@@ -12,7 +12,8 @@
     list.Observe('value', function (value) {
         ul.append($('<li />').html('<b>'+value+'</b>'));
     });
-    list.Observe('value', function (value) {
+    list.Observe('value', function (value, oldVal) {
+        console.log(value, oldVal);
         ul1.append($('<li />').html('dusra hai <b>'+value+'</b>'));
     });
 

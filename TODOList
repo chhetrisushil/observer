@@ -1,0 +1,4 @@
+1. Support initializing multiple instance of objects and arrays - create unique id's for them - DONE
+2. observe adding of item to the object/ removing of item from the object
+3. support index updating e.g. var a = DefineObject([1,2,3]); a(2, 57); // where 2 is index and 57 is the value
+4. support splice in array
