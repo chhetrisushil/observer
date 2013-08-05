@@ -37,11 +37,12 @@
 
             throw new Error('Unexpected Error');
         },
-        callHandler = function (list, value, oldValue) {
-            var len, i, handler;
+        callHandler = function () {
+            var argsList = Array.prototype.slice.call(arguments),
+                len, i, handler, list = argsList.shift();
             for(i = 0, len = list.length; i < len; i++) {
                 handler = list[i];
-                handler.call(this, value, oldValue);
+                handler.apply(this, argsList);
             }
         },
         getGUID = (function (d) {
@@ -53,7 +54,7 @@
                 return prefix + (count++);
             };
         })(Date),
-        DefineObject = function (param) {
+        Define = function (param) {
             var observerList = {},
                 toString = Object.prototype.toString,
                 _type = toString.call(param).match(/\[object (.*?)\]/)[1],
@@ -174,11 +175,26 @@
 
                     return param.length;
                 };
+
+                getterSetter.splice= function (index, noOfItem) {
+                    var list, _cList = observerList, result;
+
+                    var result = param.splice.apply(param, arguments);
+                    list = _cList['splice'];
+
+                    if (_isArrChangeApplied) {
+                        list = list ? list.concat(_cList[id]) : _cList[id];
+                    }
+
+                    list && callHandler.call(param, list, result, index, noOfItem);
+
+                    return param.length;
+                };
             }
 
             return getterSetter;
         };
 
     //expose the Classes to outer world
-    W.DefineObject = DefineObject;
+    W.Define = Define;
 })(this);

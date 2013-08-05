@@ -5,7 +5,7 @@
  * @time: 3:52 AM
  */
 (function (W, U) {
-    var list = DefineObject({value: ''}),
+    var list = Define({value: ''}),
         ul = $('<ul />'),
         ul1 = $('<ul />'),
         input, input1;
