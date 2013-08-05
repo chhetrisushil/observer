@@ -87,7 +87,7 @@
                     return getterSetter;
                 }
 
-                return param[prop];
+                return (!prop && !value) ? clone(param) : param[prop];
             };
 
             getterSetter.Observe = function (prop, handler) {
