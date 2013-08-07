@@ -116,17 +116,17 @@
             };
 
             if (_isArray) {
-                getterSetter.push = function (val) {
+                getterSetter.push = function () {
                     var list, _cList = observerList;
 
-                    param.push(val);
+                    Array.prototype.push.apply(param, arguments);
                     list = _cList['push'];
 
                     if (_isArrChangeApplied) {
                         list = list ? list.concat(_cList[id]) : _cList[id];
                     }
 
-                    list && callHandler.call(param, list, val);
+                    list && callHandler.apply(param, [list].concat(Array.prototype.slice.call(arguments)));
 
                     return param.length;
                 };
@@ -161,17 +161,17 @@
                     return removedVal;
                 };
 
-                getterSetter.unshift = function (val) {
+                getterSetter.unshift = function () {
                     var list, _cList = observerList;
 
-                    param.unshift(val);
+                    Array.prototype.unshift.apply(param, arguments);
                     list = _cList['unshift'];
 
                     if (_isArrChangeApplied) {
                         list = list ? list.concat(_cList[id]) : _cList[id];
                     }
 
-                    list && callHandler.call(param, list, val);
+                    list && callHandler.apply(param, [list].concat(Array.prototype.slice.call(arguments)));
 
                     return param.length;
                 };
