@@ -71,6 +71,6 @@
             return c;
         };
 
-    //Pulish Classes for external Access
+    //Publish Classes for external Access
     W.ObserveProp = ObserveProp;
 })(this)
