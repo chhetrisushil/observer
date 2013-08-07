@@ -37,9 +37,9 @@
 
             throw new Error('Unexpected Error');
         },
-        callHandler = function () {
-            var argsList = Array.prototype.slice.call(arguments),
-                len, i, handler, list = argsList.shift();
+        callHandler = function (list) {
+            var argsList = Array.prototype.slice.call(arguments, 1),
+                len, i, handler;
             for(i = 0, len = list.length; i < len; i++) {
                 handler = list[i];
                 handler.apply(this, argsList);

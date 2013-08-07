@@ -9,6 +9,7 @@
         ul = $('<ul />'),
         ul1 = $('<ul />'),
         input, input1;
+
     list.Observe('value', function (value) {
         ul.append($('<li />').html('<b>'+value+'</b>'));
     });
