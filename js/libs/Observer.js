@@ -176,7 +176,7 @@
                     return param.length;
                 };
 
-                getterSetter.splice= function (index, noOfItem) {
+                getterSetter.splice= function (index, noOfItem, itemToAdd) {
                     var list, _cList = observerList, result;
 
                     var result = param.splice.apply(param, arguments);
@@ -186,7 +186,7 @@
                         list = list ? list.concat(_cList[id]) : _cList[id];
                     }
 
-                    list && callHandler.call(param, list, result, index, noOfItem);
+                    list && callHandler.call(param, list, result, index, noOfItem, itemToAdd);
 
                     return param.length;
                 };
